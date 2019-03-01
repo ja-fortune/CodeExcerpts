@@ -2,8 +2,8 @@
 #define COLLISIONWORLD_H
 
 #include "../Rendering/3D/GameObject.h"
-
-
+#include "SphereCollider.h"
+#include "BoxCollider.h"
 
 
 class CollisionWorld
@@ -20,10 +20,18 @@ public:
 	static CollisionWorld* GetInstance();
 	void AddObject(GameObject* go_);
 	void Update();
-	void CollisionObjObj(GameObject* first, GameObject* second);
-	void CollisionObjRigid(GameObject* first, GameObject* second);
-	void CollisionRigidObj(GameObject* first, GameObject* second);
-	void CollisionRigidRigid(GameObject* first, GameObject* second);
+	void CollisionObjObj(GameObject* first, GameObject* second, Collider::CollisionInfo colInfo);
+	void CollisionObjRigid(GameObject* first, GameObject* second, Collider::CollisionInfo colInfo);
+	void CollisionRigidObj(GameObject* first, GameObject* second, Collider::CollisionInfo colInfo);
+	void CollisionRigidRigid(GameObject* first, GameObject* second, Collider::CollisionInfo colInfo);
+
+	bool checkCollision(GameObject* first, GameObject* second, Collider::CollisionInfo* colInfo);
+
+	bool SphereSphere(GameObject* first, GameObject* second, Collider::CollisionInfo* colInfo);
+	bool SphereBox(GameObject* first, GameObject* second, Collider::CollisionInfo* colInfo);
+	bool BoxSphere(GameObject* first, GameObject* second, Collider::CollisionInfo* colInfo);
+	bool BoxBox(GameObject* first, GameObject* second, Collider::CollisionInfo* colInfo);
+
 
 private:
 	CollisionWorld();
